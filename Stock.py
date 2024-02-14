@@ -8,7 +8,7 @@ b= BSE()
 symbol=['500570','500400','507685','500520','532439']
 
 stock_data=[]
-
+print("First Commit")
 for symbol in symbol:
     data=b.getQuote(symbol)
     stock_data.append(data)
