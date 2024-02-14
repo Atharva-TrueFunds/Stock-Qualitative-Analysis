@@ -2,7 +2,7 @@ import numpy as np
 import pandas as np
 import matplotlib.pyplot as plt
 from bsedata.bse import BSE
-import yagmail
+# import yagmail
 
 b= BSE()
 symbol=['500570','500400','507685','500520','532439']
