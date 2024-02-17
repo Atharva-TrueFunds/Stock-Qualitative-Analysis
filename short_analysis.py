@@ -3,7 +3,7 @@ import pandas as pd
 from bsedata.bse import BSE
 
 b = BSE()
-data = pd.read_csv("Updated_stock_data_Active.csv")
+data = pd.read_csv("short_analysis.csv")
 
 imp_columns = data[['SecurityCode', 'companyName', 'currentValue', 'change', 'pChange', 'updatedOn', 'securityID', 'group', 'faceValue', 'industry', 'previousClose', 'previousOpen', 'dayHigh', 'dayLow', '52weekHigh', '52weekLow', 'weightedAvgPrice', 'totalTradedValue', 'totalTradedQuantity', '2WeekAvgQuantity', 'marketCapFull', 'marketCapFreeFloat']]
 
