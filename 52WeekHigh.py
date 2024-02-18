@@ -3,7 +3,7 @@ import pandas as pd
 from bsedata.bse import BSE
 from datetime import datetime
 
-data = pd.read_csv("Merge_currentValue.csv")
+data = pd.read_csv("shortdatabase.csv")
 
 symbols = data['SecurityCode'].tolist()
 b = BSE()
@@ -23,8 +23,7 @@ df['newColumn'] = df['52weekHigh']
 
 imp_columns = pd.concat([data['SecurityCode'], data['companyName'], df['currentValue'], df['52weekHigh'], df['newColumn']], axis=1)
 
-if (df['currentValue'] > df['52weekHigh']).any():
-    print(data.loc[df['currentValue'] > df['52weekHigh'], 'companyName'])
+# Filter companies where current value exceeds 52-week high
+companies_exceeding_52week_high = imp_columns[imp_columns['currentValue'] > imp_columns['52weekHigh']]
 
-
-    # imp_columns.to_csv('Merge_currentValue.csv', index=False)
+print(companies_exceeding_52week_high[['SecurityCode', 'companyName']])
