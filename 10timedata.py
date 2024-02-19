@@ -3,7 +3,7 @@ import pandas as pd
 from bsedata.bse import BSE
 from datetime import datetime
 
-data = pd.read_csv("Merge_currentValue.csv")  # Load existing data
+data = pd.read_csv("Merge_currentValue.csv")
 
 symbols = data['SecurityCode'].tolist()
 b = BSE()

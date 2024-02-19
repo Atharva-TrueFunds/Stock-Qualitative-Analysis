@@ -4,9 +4,9 @@ import matplotlib.pyplot as plt
 from bsedata.bse import BSE
 
 b= BSE()
-data=pd.read_csv("Equity.csv")
+data=pd.read_csv("marketcap_level.csv")
 
-symbol= data['Security Code'].tolist()
+symbol= data['SecurityCode'].tolist()
 print(symbol)
 
 stock_data=[]
@@ -19,7 +19,7 @@ for symbol in symbol:
         pass
 
 df=pd.DataFrame(stock_data)
-imp_columns= df[['Security Code','companyName','currentValue','change','pChange', 'updatedOn','securityID','scripCode','group','faceValue','industry','previousClose','previousOpen','dayHigh','dayLow','52weekHigh','52weekLow','weightedAvgPrice','totalTradedValue','totalTradedQuantity','2WeekAvgQuantity','marketCapFull','marketCapFreeFloat']]
+imp_columns= df[['companyName','currentValue','change','pChange', 'updatedOn','securityID','scripCode','group','faceValue','industry','previousClose','previousOpen','dayHigh','dayLow','52weekHigh','52weekLow','weightedAvgPrice','totalTradedValue','totalTradedQuantity','2WeekAvgQuantity','marketCapFull','marketCapFreeFloat']]
 print(imp_columns)
 
-# imp_columns.to_csv('Updated_stock_data_Active.csv',index= True)
+imp_columns.to_csv('imp_stock_quote.csv',index= True)

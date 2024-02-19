@@ -10,20 +10,12 @@ b = BSE()
 
 stock_data = []
 
-for symbol in symbols:
-    stock_quote = b.getQuote(str(symbol))
-    if stock_quote:
-        stock_data.append({'SecurityCode': symbol, 'currentValue': stock_quote['currentValue'],'52weekHigh': stock_quote['52weekHigh']})
-    else:
-        print(f"Error fetching data for symbol: {symbol}")
+imp_columns = pd.concat([data['SecurityCode'], data['companyName'], data['currentValue'], data['52weekHigh']], axis=1)
 
-df = pd.DataFrame(stock_data)
-
-df['newColumn'] = df['52weekHigh']
-
-imp_columns = pd.concat([data['SecurityCode'], data['companyName'], df['currentValue'], df['52weekHigh'], df['newColumn']], axis=1)
-
-# Filter companies where current value exceeds 52-week high
-companies_exceeding_52week_high = imp_columns[imp_columns['currentValue'] > imp_columns['52weekHigh']]
+data['currentValue'] = pd.to_numeric(data['currentValue'], errors='coerce')
+data['currentValue'] = data['currentValue'].round(2)
+data['52weekHigh'] = pd.to_numeric(data['52weekHigh'], errors='coerce')
+data['52weekHigh'] = data['52weekHigh'].round(2)
+companies_exceeding_52week_high = imp_columns[imp_columns['currentValue'] >= imp_columns['52weekHigh']]
 
 print(companies_exceeding_52week_high[['SecurityCode', 'companyName']])
