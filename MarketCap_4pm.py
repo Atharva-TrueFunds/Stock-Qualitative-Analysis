@@ -3,7 +3,7 @@ import pandas as pd
 from bsedata.bse import BSE
 from datetime import datetime
 
-data = pd.read_csv("marketCap_Analysis.csv")
+data = pd.read_csv("MarketCap_4pm.csv")
 
 symbols = data['SecurityCode'].tolist()
 b = BSE()
@@ -19,10 +19,10 @@ for symbol in symbols:
 
 df = pd.DataFrame(stock_data)
 
-last_column_index = len(data.columns)
+last_column_index = len(data.columns) - 1
 
-next_column_name = "DATA" + str(last_column_index + 1)
+next_column_name = "Feb" + str(last_column_index + 16)
 
 data[next_column_name] = df['marketCapFull']
 
-data.to_csv('marketCap_Analysis.csv', index=False)
+data.to_csv('MarketCap_4pm.csv', index=False)

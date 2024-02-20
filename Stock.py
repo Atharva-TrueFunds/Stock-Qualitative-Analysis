@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from bsedata.bse import BSE
 
 b= BSE()
-data=pd.read_csv("marketcap_level.csv")
+data=pd.read_excel("imp_stock_quote_copy.xlsx", sheet_name='Feb20')
 
 symbol= data['SecurityCode'].tolist()
 print(symbol)
@@ -22,4 +22,4 @@ df=pd.DataFrame(stock_data)
 imp_columns= df[['companyName','currentValue','change','pChange', 'updatedOn','securityID','scripCode','group','faceValue','industry','previousClose','previousOpen','dayHigh','dayLow','52weekHigh','52weekLow','weightedAvgPrice','totalTradedValue','totalTradedQuantity','2WeekAvgQuantity','marketCapFull','marketCapFreeFloat']]
 print(imp_columns)
 
-imp_columns.to_csv('imp_stock_quote.csv',index= True)
+imp_columns.to_excel('imp_stock_quote_copy.xlsx', sheet_name='Feb20',index= True)

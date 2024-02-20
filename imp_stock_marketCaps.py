@@ -2,7 +2,7 @@ import pandas as pd
 from bsedata.bse import BSE
 
 b = BSE()
-data = pd.read_csv("marketcap.csv")
+data = pd.read_csv("marketcap_level.csv")
 
 symbols = data['SecurityCode'].tolist()
 
@@ -28,4 +28,4 @@ extracted_df = pd.DataFrame(extracted_data)
 
 print(extracted_df)
 
-extracted_df.to_csv('marketcap.csv', index=False)
+extracted_df.to_csv('marketcap_level.csv', index=False)
