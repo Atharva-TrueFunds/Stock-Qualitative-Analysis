@@ -1,45 +1,41 @@
 import numpy as np
 import pandas as pd
-from bsedata.bse import BSE
+from docx import Document
 
-data = pd.read_csv("Merge_currentValue.csv")
+data = pd.read_excel("Qualitative data analysis.xlsx", sheet_name='currentValue')
+data.columns.values[2:6] = ['19Feb','20Feb', '21Feb', '22Feb']
+print(data.columns)
 
-b = BSE()
-data.rename(columns={'B': 'day1', 'C': 'day2', 'D': 'day3', 'E': 'day4', 'F': 'day5'}, inplace=True)
-currentValue_data = data[['companyName', 'SecurityCode', 'day1', 'day2', 'day3', 'day4', 'day5']]
+# data.rename(columns={'currentValue': 'Feb-19', 'currentValue.1': 'Feb-20', 'currentValue.2': 'Feb-21'}, inplace=True)
+currentValue_data = data[['scripCode', 'companyName', '19Feb','20Feb', '21Feb', '22Feb']]
 
-highest_column_name = []
-highest_value = []
-lowest_column_name = []
-lowest_value = []
-
-currentValue_data[['day1', 'day2', 'day3', 'day4', 'day5']] = currentValue_data[['day1', 'day2', 'day3', 'day4', 'day5']].apply(pd.to_numeric, errors='coerce')
-
-for index, row in currentValue_data.iterrows():
-    highest_value.append(row[['day1', 'day2', 'day3', 'day4', 'day5']].max())
-    highest_column_name.append(row[['day1', 'day2', 'day3', 'day4', 'day5']].idxmax())
-    lowest_value.append(row[['day1', 'day2', 'day3', 'day4', 'day5']].min())
-    lowest_column_name.append(row[['day1', 'day2', 'day3', 'day4', 'day5']].idxmin())
+highest_values = []
+highest_column_names = []
+lowest_values = []
+lowest_column_names = []
 
 for index, row in currentValue_data.iterrows():
-    if len(set(row[['day1', 'day2', 'day3', 'day4', 'day5']])) > 1:
-        data['Highest_Value'] = highest_value
-        data['Highest_Column_Name'] = highest_column_name
-        data['Lowest_Value'] = lowest_value
-        data['Lowest_Column_Name'] = lowest_column_name
+    highest_values.append(row[['19Feb','20Feb', '21Feb', '22Feb']].max())
+    highest_column_names.append(row[['19Feb','20Feb', '21Feb', '22Feb']].idxmax())
+    lowest_values.append(row[['19Feb','20Feb', '21Feb', '22Feb']].min())
+    lowest_column_names.append(row[['19Feb','20Feb', '21Feb', '22Feb']].idxmin())
 
-ascending_order = (data[['day1', 'day2', 'day3', 'day4', 'day5']].values ==
-                    np.sort(data[['day1', 'day2', 'day3', 'day4', 'day5']], axis=1)).all(axis=1)
+#doc = Document()
 
-descending_order = (data[['day1', 'day2', 'day3', 'day4', 'day5']].values ==
-                    np.sort(data[['day1', 'day2', 'day3', 'day4', 'day5']], axis=1)[:, ::-1]).all(axis=1)
+#doc.add_heading('Current Value Analysis', level=1)
 
-ascending_data = data[ascending_order]
-descending_data = data[descending_order]
+# for i in range(len(currentValue_data)):
+#     doc.add_paragraph(f"Scrip Code: {currentValue_data['scripCode'][i]}")
+#     doc.add_paragraph(f"Company Name: {currentValue_data['companyName'][i]}")
+#     doc.add_paragraph(f"Highest Value: {highest_values[i]}, Column Name: {highest_column_names[i]}")
+#     doc.add_paragraph(f"Lowest Value: {lowest_values[i]}, Column Name: {lowest_column_names[i]}")
+#     doc.add_paragraph("")
 
-print("Security Codes and Company Names with ascending order:")
-print(ascending_data[['SecurityCode', 'companyName']])
-print("\nSecurity Codes and Company Names with descending order:")
-print(descending_data[['SecurityCode', 'companyName']])
+# doc.save('currentValue_analysis.docx')
+currentValue_data['Highest Value'] = highest_values
+currentValue_data['Highest Value Column'] = highest_column_names
+currentValue_data['Lowest Value'] = lowest_values
+currentValue_data['Lowest Value Column'] = lowest_column_names
 
-data.to_csv('Merge_currentValue.csv', index=False)
+currentValue_data.to_excel('currentValue_Analysis.xlsx', sheet_name='currentValue', index=True)
+
