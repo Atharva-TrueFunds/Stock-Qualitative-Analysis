@@ -3,11 +3,11 @@ import pandas as pd
 from docx import Document
 
 data = pd.read_excel("Qualitative data analysis.xlsx", sheet_name='currentValue')
-data.columns.values[2:6] = ['19Feb','20Feb', '21Feb', '22Feb']
+data.columns.values[2:7] = ['19Feb','20Feb', '21Feb', '22Feb', '23Feb']
 print(data.columns)
 
 # data.rename(columns={'currentValue': 'Feb-19', 'currentValue.1': 'Feb-20', 'currentValue.2': 'Feb-21'}, inplace=True)
-currentValue_data = data[['scripCode', 'companyName', '19Feb','20Feb', '21Feb', '22Feb']]
+currentValue_data = data[['scripCode', 'companyName', '19Feb','20Feb', '21Feb', '22Feb', '23Feb']]
 
 highest_values = []
 highest_column_names = []
@@ -15,10 +15,10 @@ lowest_values = []
 lowest_column_names = []
 
 for index, row in currentValue_data.iterrows():
-    highest_values.append(row[['19Feb','20Feb', '21Feb', '22Feb']].max())
-    highest_column_names.append(row[['19Feb','20Feb', '21Feb', '22Feb']].idxmax())
-    lowest_values.append(row[['19Feb','20Feb', '21Feb', '22Feb']].min())
-    lowest_column_names.append(row[['19Feb','20Feb', '21Feb', '22Feb']].idxmin())
+    highest_values.append(row[['19Feb','20Feb', '21Feb', '22Feb', '23Feb']].max())
+    highest_column_names.append(row[['19Feb','20Feb', '21Feb', '22Feb', '23Feb']].idxmax())
+    lowest_values.append(row[['19Feb','20Feb', '21Feb', '22Feb', '23Feb']].min())
+    lowest_column_names.append(row[['19Feb','20Feb', '21Feb', '22Feb', '23Feb']].idxmin())
 
 #doc = Document()
 

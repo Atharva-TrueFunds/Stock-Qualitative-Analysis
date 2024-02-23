@@ -5,6 +5,7 @@ from tabulate import tabulate
 data = pd.read_excel("Qualitative data analysis.xlsx", sheet_name='currentValue')
 
 data.columns.values[2:6] = ['19Feb', '20Feb', '21Feb', '22Feb']
+print(data.columns)
 
 imp_columns = data[['scripCode', 'companyName', '19Feb', '20Feb', '21Feb', '22Feb', '52weekHigh', '52weekLow']]
 

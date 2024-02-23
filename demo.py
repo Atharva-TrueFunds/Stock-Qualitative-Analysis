@@ -63,30 +63,30 @@ for symbols in symbols:
 
                 smaller_than_df = df[df['Start Date'] < df['End Date']]
 
-                with pd.ExcelWriter('price_Change_day_to_each_day.xlsx') as writer:
+                with pd.ExcelWriter('demo.xlsx') as writer:
                     greater_than_df.to_excel(writer, sheet_name='Data', index=False)
                     smaller_than_df.to_excel(writer, sheet_name='Data', startrow=len(greater_than_df) + 2, index=False)
 
-                if percent_change >= 2 and percent_change <= 5:
-                    up_lists_2_5.append((symbols, CompanyName, day_from - 1, day_to - 1, percent_change))
-                elif percent_change > 5 and percent_change <= 10:
-                    up_lists_5_10.append((symbols, CompanyName, day_from - 1, day_to - 1, percent_change))
-                elif percent_change > 10 and percent_change <= 15:
-                    up_lists_10_15.append((symbols, CompanyName, day_from - 1, day_to - 1, percent_change))
-                elif percent_change > 15 and percent_change <= 20:
-                    up_lists_15_20.append((symbols, CompanyName, day_from - 1, day_to - 1, percent_change))
-                elif percent_change > 20:
-                    up_lists_above_20.append((symbols, CompanyName, day_from - 1, day_to - 1, percent_change))
+#                 if percent_change >= 2 and percent_change <= 5:
+#                     up_lists_2_5.append((symbols, CompanyName, day_from - 1, day_to - 1, percent_change))
+#                 elif percent_change > 5 and percent_change <= 10:
+#                     up_lists_5_10.append((symbols, CompanyName, day_from - 1, day_to - 1, percent_change))
+#                 elif percent_change > 10 and percent_change <= 15:
+#                     up_lists_10_15.append((symbols, CompanyName, day_from - 1, day_to - 1, percent_change))
+#                 elif percent_change > 15 and percent_change <= 20:
+#                     up_lists_15_20.append((symbols, CompanyName, day_from - 1, day_to - 1, percent_change))
+#                 elif percent_change > 20:
+#                     up_lists_above_20.append((symbols, CompanyName, day_from - 1, day_to - 1, percent_change))
 
-df_2_5 = pd.DataFrame(up_lists_2_5, columns=['Symbol', 'Company Name', 'Day From', 'Day To', 'Percent Change 2-5%'])
-df_5_10 = pd.DataFrame(up_lists_5_10, columns=['Symbol', 'Company Name', 'Day From', 'Day To', 'Percent Change 5-10%'])
-df_10_15 = pd.DataFrame(up_lists_10_15, columns=['Symbol', 'Company Name', 'Day From', 'Day To', 'Percent Change 10-15%'])
-df_15_20 = pd.DataFrame(up_lists_15_20, columns=['Symbol', 'Company Name', 'Day From', 'Day To', 'Percent Change 15-20%'])
-df_above_20 = pd.DataFrame(up_lists_above_20, columns=['Symbol', 'Company Name', 'Day From', 'Day To', 'Percent Change above 20%'])
+# df_2_5 = pd.DataFrame(up_lists_2_5, columns=['Symbol', 'Company Name', 'Day From', 'Day To', 'Percent Change 2-5%'])
+# df_5_10 = pd.DataFrame(up_lists_5_10, columns=['Symbol', 'Company Name', 'Day From', 'Day To', 'Percent Change 5-10%'])
+# df_10_15 = pd.DataFrame(up_lists_10_15, columns=['Symbol', 'Company Name', 'Day From', 'Day To', 'Percent Change 10-15%'])
+# df_15_20 = pd.DataFrame(up_lists_15_20, columns=['Symbol', 'Company Name', 'Day From', 'Day To', 'Percent Change 15-20%'])
+# df_above_20 = pd.DataFrame(up_lists_above_20, columns=['Symbol', 'Company Name', 'Day From', 'Day To', 'Percent Change above 20%'])
 
-with pd.ExcelWriter('price_Change_day_to_day.xlsx') as writer:
-    df_2_5.to_excel(writer, sheet_name='2-5%', index=False)
-    df_5_10.to_excel(writer, sheet_name='5-10%', index=False)
-    df_10_15.to_excel(writer, sheet_name='10-15%', index=False)
-    df_15_20.to_excel(writer, sheet_name='15-20%', index=False)
-    df_above_20.to_excel(writer, sheet_name='Above 20%', index=False)
+# with pd.ExcelWriter('price_Change_day_to_day.xlsx') as writer:
+#     df_2_5.to_excel(writer, sheet_name='2-5%', index=False)
+#     df_5_10.to_excel(writer, sheet_name='5-10%', index=False)
+#     df_10_15.to_excel(writer, sheet_name='10-15%', index=False)
+#     df_15_20.to_excel(writer, sheet_name='15-20%', index=False)
+#     df_above_20.to_excel(writer, sheet_name='Above 20%', index=False)
