@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 from bsedata.bse import BSE
 
-data = pd.read_excel("Qualitative data analysis.xlsx", sheet_name='demo')
+data = pd.read_excel("Qualitative data analysis.xlsx", sheet_name='currentValue')
 
 df=pd.DataFrame(data)
 
@@ -31,7 +31,11 @@ down_lists = [[] for _ in range(21)]
 # result=[]
 for symbols in symbols:
     row_values = data[data['scripCode'] == symbols]
-    CompanyName= row_values['companyName'].values[0]
+    if not row_values.empty:
+        CompanyName = row_values['companyName'].values[0]
+    else:
+        print("DataFrame 'row_values' is empty.")
+
     for i in range (2,6):
         for j in range(2,6):
             if i!=j:
