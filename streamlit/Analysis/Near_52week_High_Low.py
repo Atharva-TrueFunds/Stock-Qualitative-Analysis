@@ -1,4 +1,5 @@
 import pandas as pd
+import streamlit as str
 
 data = pd.read_excel("Qualitative data analysis.xlsx", sheet_name='values')
 

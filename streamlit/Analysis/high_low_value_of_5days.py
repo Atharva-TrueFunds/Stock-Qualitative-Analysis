@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 from docx import Document
+import streamlit as str
 
 data = pd.read_excel("Qualitative data analysis.xlsx", sheet_name='currentValue')
 data.columns.values[2:7] = ['19Feb','20Feb', '21Feb', '22Feb', '23Feb']
