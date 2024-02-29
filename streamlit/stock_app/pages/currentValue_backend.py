@@ -39,7 +39,6 @@ if run_button_clicked:
 
             df_stock = pd.DataFrame(stock_data)
 
-            # Write the new data as a new column in the existing Excel sheet
             with pd.ExcelWriter(
                 existing_excel_path, mode="a", engine="openpyxl"
             ) as writer:
