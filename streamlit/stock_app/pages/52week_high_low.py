@@ -1,11 +1,20 @@
-import numpy as np
 import pandas as pd
-from tabulate import tabulate
+import streamlit as st
 
-data = pd.read_excel("Qualitative data analysis.xlsx", sheet_name="currentValue")
+data = pd.read_excel("All_sheets.xlsx", sheet_name="master")
 
-data.columns.values[2:6] = ["19Feb", "20Feb", "21Feb", "22Feb"]
-print(data.columns)
+data.columns.values[3:13] = [
+    "19Feb",
+    "20Feb",
+    "21Feb",
+    "22Feb",
+    "23Feb",
+    "26Feb",
+    "27Feb",
+    "28Feb",
+    "29Feb",
+    "01Mar",
+]
 
 imp_columns = data[
     [
@@ -15,6 +24,12 @@ imp_columns = data[
         "20Feb",
         "21Feb",
         "22Feb",
+        "23Feb",
+        "26Feb",
+        "27Feb",
+        "28Feb",
+        "29Feb",
+        "01Mar",
         "52weekHigh",
         "52weekLow",
     ]
@@ -27,7 +42,18 @@ imp_columns["52weekHigh"] = pd.to_numeric(
 companies_exceeding_52week_high = pd.DataFrame(columns=imp_columns.columns)
 companies_exceeding_52week_low = pd.DataFrame(columns=imp_columns.columns)
 
-for column in ["19Feb", "20Feb", "21Feb", "22Feb"]:
+for column in [
+    "19Feb",
+    "20Feb",
+    "21Feb",
+    "22Feb",
+    "23Feb",
+    "26Feb",
+    "27Feb",
+    "28Feb",
+    "29Feb",
+    "01Mar",
+]:
 
     exceeding_52week_high = imp_columns[
         imp_columns[column] >= imp_columns["52weekHigh"]
@@ -46,46 +72,115 @@ companies_exceeding_52week_low = companies_exceeding_52week_low.drop_duplicates(
 
 exceeding_52week_high_data = []
 for index, row in companies_exceeding_52week_high.iterrows():
-    exceed_date = row[["19Feb", "20Feb", "21Feb", "22Feb"]].idxmax()
-    abc = exceeding_52week_high_data.append(
-        [row["scripCode"], row["companyName"], exceed_date, row["52weekHigh"]]
+    exceed_date = row[
+        [
+            "19Feb",
+            "20Feb",
+            "21Feb",
+            "22Feb",
+            "23Feb",
+            "26Feb",
+            "27Feb",
+            "28Feb",
+            "29Feb",
+            "01Mar",
+        ]
+    ].idxmax()
+
+    exceed_value = row[
+        [
+            "19Feb",
+            "20Feb",
+            "21Feb",
+            "22Feb",
+            "23Feb",
+            "26Feb",
+            "27Feb",
+            "28Feb",
+            "29Feb",
+            "01Mar",
+        ]
+    ].max()
+
+    exceeding_52week_high_data.append(
+        [
+            row["scripCode"],
+            row["companyName"],
+            exceed_date,
+            exceed_value,
+            row["52weekHigh"],
+        ]
     )
 
 exceeding_52week_low_data = []
 for index, row in companies_exceeding_52week_low.iterrows():
-    exceed_date = row[["19Feb", "20Feb", "21Feb", "22Feb"]].idxmin()
-    xyz = exceeding_52week_low_data.append(
-        [row["scripCode"], row["companyName"], exceed_date, row["52weekLow"]]
+    exceed_date = row[
+        [
+            "19Feb",
+            "20Feb",
+            "21Feb",
+            "22Feb",
+            "23Feb",
+            "26Feb",
+            "27Feb",
+            "28Feb",
+            "29Feb",
+            "01Mar",
+        ]
+    ].idxmin()
+
+    exceed_value = row[
+        [
+            "19Feb",
+            "20Feb",
+            "21Feb",
+            "22Feb",
+            "23Feb",
+            "26Feb",
+            "27Feb",
+            "28Feb",
+            "29Feb",
+            "01Mar",
+        ]
+    ].min()
+
+    exceeding_52week_low_data.append(
+        [
+            row["scripCode"],
+            row["companyName"],
+            exceed_date,
+            exceed_value,
+            row["52weekLow"],
+        ]
     )
 
 exceeding_52week_high_df = pd.DataFrame(
     exceeding_52week_high_data,
-    columns=["Scrip Code", "Company Name", "Exceeded High Date", "52-Week High"],
+    columns=[
+        "Scrip Code",
+        "Company Name",
+        "Exceeded High Date",
+        "Value on that Date",
+        "52-Week High",
+    ],
 )
+exceeding_52week_high_df["52-Week High"] = exceeding_52week_high_df[
+    "52-Week High"
+].round(2)
+
+st.table(exceeding_52week_high_df)
 
 exceeding_52week_low_df = pd.DataFrame(
     exceeding_52week_low_data,
-    columns=["Scrip Code", "Company Name", "Exceeded Low Date", "52-Week Low"],
+    columns=[
+        "Scrip Code",
+        "Company Name",
+        "Exceeded Low Date",
+        "Value on that day",
+        "52-Week Low",
+    ],
 )
 
-import pandas as pd
+exceeding_52week_low_df["52-Week Low"] = exceeding_52week_low_df["52-Week Low"].round(2)
 
-with pd.ExcelWriter("52WeekHigh_Low.xlsx", engine="xlsxwriter") as writer:
-
-    exceeding_52week_high_df.to_excel(
-        writer,
-        sheet_name="Exceeding 52_Week_high_low",
-        index=True,
-        startrow=0,
-        startcol=0,
-    )
-
-    workbook = writer.book
-    worksheet = writer.sheets["Exceeding 52_Week_high_low"]
-    exceeding_52week_low_df.to_excel(
-        writer,
-        sheet_name="Exceeding 52_Week_high_low",
-        index=True,
-        startrow=exceeding_52week_high_df.shape[0] + 2,
-        startcol=0,
-    )
+st.table(exceeding_52week_low_df)

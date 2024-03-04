@@ -110,7 +110,7 @@ def main():
                 engine="openpyxl",
             )
             excel_data_1 = pd.read_excel(
-                r"C:\Users\HP\Staging\streamlit\stock_app\Equity.xlsx"
+                r"C:\Users\HP\Staging\streamlit\stock_app\code.xlsx"
             )
             selected_columns = excel_data_1[
                 ["Sector_Name", "Industry_New_Name", "Igroup_Name", "Isubgroup_Name"]
