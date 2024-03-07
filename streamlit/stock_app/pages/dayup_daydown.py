@@ -1,58 +1,54 @@
 import pandas as pd
-import numpy as np
 import streamlit as st
-from datetime import datetime
-import os
 
 data = pd.read_excel(
-    r"C:\Users\HP\Staging\streamlit\stock_app\All_sheets.xlsx", sheet_name="master"
+    r"C:\Users\HP\Staging\streamlit\stock_app\code.xlsx", sheet_name="currentValue"
 )
-print(data.columns)
-
 data.columns.values[2:12] = [
-    "2024-02-19 00:00:00",
-    "2024-02-20 00:00:00",
-    "2024-02-21 00:00:00",
-    "2024-02-22 00:00:00",
-    "2024-02-23 00:00:00",
-    "2024-02-26 00:00:00",
-    "2024-02-27 00:00:00",
-    "2024-02-28 00:00:00",
-    "2024-02-29 00:00:00",
-    "2024-03-01 00:00:0",
+    "19Feb",
+    "20Feb",
+    "21Feb",
+    "22Feb",
+    "23Feb",
+    "26Feb",
+    "27Feb",
+    "28Feb",
+    "29Feb",
+    "01Mar",
 ]
 
-currentValue_data = data[
-    [
-        "scripCode",
-        "2024-02-19 00:00:00",
-        "2024-02-20 00:00:00",
-        "2024-02-21 00:00:00",
-        "2024-02-22 00:00:00",
-        "2024-02-23 00:00:00",
-        "2024-02-26 00:00:00",
-        "2024-02-27 00:00:00",
-        "2024-02-28 00:00:00",
-        "2024-02-29 00:00:00",
-        "2024-03-01 00:00:0",
-    ]
+expected_columns = [
+    "19Feb",
+    "20Feb",
+    "21Feb",
+    "22Feb",
+    "23Feb",
+    "26Feb",
+    "27Feb",
+    "28Feb",
+    "29Feb",
+    "01Mar",
 ]
+if not all(col in data.columns for col in expected_columns):
+    st.error("Columns do not match the expected date format.")
+    st.stop()
 
-run_button_click = st.button("Run")
 ascending_order = []
 descending_order = []
 
-if run_button_click:
-    try:
-        for index, row in currentValue_data.iterrows():
-            for date_column in currentValue_data.columns[1:]:
-                date_value = row[date_column]
+# Use the correct comparison in the loop
+for index, row in data.iterrows():
+    dates = [row[col] for col in expected_columns]
+    if dates == sorted(dates):
+        ascending_order.append(row)
+    elif dates == sorted(dates, reverse=True):
+        descending_order.append(row)
 
-                if "19Feb" < date_value < "01Mar":
-                    ascending_order.append(row)
-                    st.table(pd.DataFrame(ascending_order))
-    except Exception as e:
-        print(f"Error: {e}")
+ascending_data = pd.DataFrame(ascending_order)
+descending_data = pd.DataFrame(descending_order)
 
-# if __name__ == "__main__":
-#     st.run()
+st.header("Ascending Order")
+st.table(ascending_data)
+
+st.header("Descending Order")
+st.table(descending_data)

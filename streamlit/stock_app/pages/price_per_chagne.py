@@ -1,8 +1,9 @@
 import numpy as np
 import pandas as pd
 from bsedata.bse import BSE
+import streamlit as st
 
-data = pd.read_excel("Qualitative data analysis.xlsx", sheet_name="currentValue")
+data = pd.read_excel("code.xlsx", sheet_name="currentValue")
 
 df = pd.DataFrame(data)
 
@@ -36,8 +37,8 @@ for symbols in symbols:
     else:
         print("DataFrame 'row_values' is empty.")
 
-    for i in range(2, 6):
-        for j in range(2, 6):
+    for i in range(3, 13):
+        for j in range(3, 13):
             if i != j:
                 day_from = i
                 day_to = j
@@ -128,9 +129,25 @@ df_above_20 = pd.DataFrame(
     ],
 )
 
-with pd.ExcelWriter("price_Change_day_to_day.xlsx") as writer:
-    df_2_5.to_excel(writer, sheet_name="2-5%", index=False)
-    df_5_10.to_excel(writer, sheet_name="5-10%", index=False)
-    df_10_15.to_excel(writer, sheet_name="10-15%", index=False)
-    df_15_20.to_excel(writer, sheet_name="15-20%", index=False)
-    df_above_20.to_excel(writer, sheet_name="Above 20%", index=False)
+# with pd.ExcelWriter("price_Change_day_to_day.xlsx") as writer:
+#     df_2_5.to_excel(writer, sheet_name="2-5%", index=False)
+#     df_5_10.to_excel(writer, sheet_name="5-10%", index=False)
+#     df_10_15.to_excel(writer, sheet_name="10-15%", index=False)
+#     df_15_20.to_excel(writer, sheet_name="15-20%", index=False)
+#     df_above_20.to_excel(writer, sheet_name="Above 20%", index=False)
+
+
+st.write("Percent Change below 5%")
+st.table(df_2_5)
+
+st.write("Percent Change below 10%")
+st.table(df_5_10)
+
+st.write("Percent Change below 15%")
+st.table(df_10_15)
+
+st.write("Percent Change below 20%")
+st.table(df_15_20)
+
+st.write("Percent Change above 20%")
+st.table(df_above_20)

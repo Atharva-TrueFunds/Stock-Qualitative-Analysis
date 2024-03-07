@@ -2,9 +2,9 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 
-data = pd.read_excel("All_sheets.xlsx", sheet_name="master")
+data = pd.read_excel("code.xlsx", sheet_name="currentValue")
 
-data.columns.values[3:13] = [
+data.columns.values[2:12] = [
     "19Feb",
     "20Feb",
     "21Feb",
@@ -18,7 +18,7 @@ data.columns.values[3:13] = [
 ]
 
 date_columns = data.columns[2:12]
-currentValue_data = data[["scripCode"] + list(date_columns)]
+currentValue_data = data[["scripCode"] + ["companyName"] + list(date_columns)]
 
 highest_values = []
 highest_column_names = []
