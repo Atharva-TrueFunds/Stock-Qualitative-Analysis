@@ -1,9 +1,9 @@
 import pandas as pd
 import streamlit as st
 
-data = pd.read_excel("code.xlsx", sheet_name="currentValue")
+data = pd.read_excel("All_sheets.xlsx", sheet_name="currentValue")
 
-data.columns.values[2:12] = [
+data.columns.values[2:16] = [
     "19Feb",
     "20Feb",
     "21Feb",
@@ -14,6 +14,10 @@ data.columns.values[2:12] = [
     "28Feb",
     "29Feb",
     "01Mar",
+    "02Mar",
+    "05Mar",
+    "06Mar",
+    "07Mar",
 ]
 
 imp_columns = data[
@@ -30,6 +34,10 @@ imp_columns = data[
         "28Feb",
         "29Feb",
         "01Mar",
+        "02Mar",
+        "05Mar",
+        "06Mar",
+        "07Mar",
         "52weekHigh",
         "52weekLow",
     ]
@@ -53,6 +61,10 @@ for column in [
     "28Feb",
     "29Feb",
     "01Mar",
+    "02Mar",
+    "05Mar",
+    "06Mar",
+    "07Mar",
 ]:
 
     exceeding_52week_high = imp_columns[
@@ -84,6 +96,10 @@ for index, row in companies_exceeding_52week_high.iterrows():
             "28Feb",
             "29Feb",
             "01Mar",
+            "02Mar",
+            "05Mar",
+            "06Mar",
+            "07Mar",
         ]
     ].idxmax()
 
@@ -99,6 +115,10 @@ for index, row in companies_exceeding_52week_high.iterrows():
             "28Feb",
             "29Feb",
             "01Mar",
+            "02Mar",
+            "05Mar",
+            "06Mar",
+            "07Mar",
         ]
     ].max()
 
@@ -126,6 +146,10 @@ for index, row in companies_exceeding_52week_low.iterrows():
             "28Feb",
             "29Feb",
             "01Mar",
+            "02Mar",
+            "05Mar",
+            "06Mar",
+            "07Mar",
         ]
     ].idxmin()
 
@@ -141,6 +165,10 @@ for index, row in companies_exceeding_52week_low.iterrows():
             "28Feb",
             "29Feb",
             "01Mar",
+            "02Mar",
+            "05Mar",
+            "06Mar",
+            "07Mar",
         ]
     ].min()
 

@@ -3,8 +3,8 @@ import streamlit as st
 
 data = pd.read_excel("All_sheets.xlsx", sheet_name="currentValue")
 print(data.columns)
-data.columns.values[12:13] = ["04Mar"]
-data["percent_diff_up"] = ((data["52weekHigh"] - data["04Mar"]) / data["04Mar"]) * 100
+data.columns.values[12:13] = ["05Mar"]
+data["percent_diff_up"] = ((data["52weekHigh"] - data["05Mar"]) / data["05Mar"]) * 100
 filtered_data_0_2 = data[(data["percent_diff_up"] >= 0) & (data["percent_diff_up"] < 2)]
 filtered_data_2_5 = data[(data["percent_diff_up"] >= 2) & (data["percent_diff_up"] < 5)]
 filtered_data_5_10 = data[
@@ -20,31 +20,31 @@ filtered_data_20 = data[(data["percent_diff_up"] >= 20)]
 
 
 df_up_0 = filtered_data_0_2[
-    ["scripCode", "companyName", "04Mar", "52weekHigh", "percent_diff_up"]
+    ["scripCode", "companyName", "05Mar", "52weekHigh", "percent_diff_up"]
 ]
 
 df_up_2 = filtered_data_2_5[
-    ["scripCode", "companyName", "04Mar", "52weekHigh", "percent_diff_up"]
+    ["scripCode", "companyName", "05Mar", "52weekHigh", "percent_diff_up"]
 ]
 
 df_up_5 = filtered_data_5_10[
-    ["scripCode", "companyName", "04Mar", "52weekHigh", "percent_diff_up"]
+    ["scripCode", "companyName", "05Mar", "52weekHigh", "percent_diff_up"]
 ]
 
 df_up_10 = filtered_data_10_15[
-    ["scripCode", "companyName", "04Mar", "52weekHigh", "percent_diff_up"]
+    ["scripCode", "companyName", "05Mar", "52weekHigh", "percent_diff_up"]
 ]
 
 df_up_15 = filtered_data_15_20[
-    ["scripCode", "companyName", "04Mar", "52weekHigh", "percent_diff_up"]
+    ["scripCode", "companyName", "05Mar", "52weekHigh", "percent_diff_up"]
 ]
 # df_up_20 = filtered_data_20[
-#     ["scripCode", "companyName", "04Mar", "52weekHigh", "percent_diff_up"]
+#     ["scripCode", "companyName", "05Mar", "52weekHigh", "percent_diff_up"]
 # ]
 # st.table(df_up_20)
 
 
-data["percent_diff_up"] = ((data["52weekLow"] - data["04Mar"]) / data["04Mar"]) * 100
+data["percent_diff_up"] = ((data["52weekLow"] - data["05Mar"]) / data["05Mar"]) * 100
 filtered_data_0_2 = data[(data["percent_diff_up"] >= 0) & (data["percent_diff_up"] < 2)]
 filtered_data_2_5 = data[(data["percent_diff_up"] >= 2) & (data["percent_diff_up"] < 5)]
 filtered_data_5_10 = data[
@@ -59,23 +59,23 @@ filtered_data_15_20 = data[
 filtered_data_20 = data[(data["percent_diff_up"] >= 20)]
 
 df_down_0 = filtered_data_0_2[
-    ["scripCode", "companyName", "04Mar", "52weekLow", "percent_diff_up"]
+    ["scripCode", "companyName", "05Mar", "52weekLow", "percent_diff_up"]
 ]
 
 df_down_2 = filtered_data_2_5[
-    ["scripCode", "companyName", "04Mar", "52weekLow", "percent_diff_up"]
+    ["scripCode", "companyName", "05Mar", "52weekLow", "percent_diff_up"]
 ]
 
 df_down_5 = filtered_data_5_10[
-    ["scripCode", "companyName", "04Mar", "52weekLow", "percent_diff_up"]
+    ["scripCode", "companyName", "05Mar", "52weekLow", "percent_diff_up"]
 ]
 
 df_down_10 = filtered_data_10_15[
-    ["scripCode", "companyName", "04Mar", "52weekLow", "percent_diff_up"]
+    ["scripCode", "companyName", "05Mar", "52weekLow", "percent_diff_up"]
 ]
 
 df_down_15 = filtered_data_15_20[
-    ["scripCode", "companyName", "04Mar", "52weekLow", "percent_diff_up"]
+    ["scripCode", "companyName", "05Mar", "52weekLow", "percent_diff_up"]
 ]
 
 st.write("Stock 0% to 2% UP diffenrce")
@@ -105,7 +105,7 @@ st.table(df_down_15)
 
 
 # df_down_20 = filtered_data_20[
-#     ["scripCode", "companyName", "04Mar", "52weekHigh", "percent_diff_up"]
+#     ["scripCode", "companyName", "05Mar", "52weekHigh", "percent_diff_up"]
 # ]
 # st.table(df_down_20)
 
