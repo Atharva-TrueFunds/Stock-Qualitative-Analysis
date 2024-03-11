@@ -108,12 +108,12 @@ def main():
         try:
             excel_data = pd.read_excel(
                 r"C:\Users\HP\Staging\streamlit\stock_app\code.xlsx",
-                sheet_name="Sheet2",
+                sheet_name="Sheet1",
                 engine="openpyxl",
             )
             excel_data_1 = pd.read_excel(
                 r"C:\Users\HP\Staging\streamlit\stock_app\code.xlsx",
-                sheet_name="Sheet2",
+                sheet_name="Sheet1",
             )
             selected_columns = excel_data_1[
                 ["Sector_Name", "Industry_New_Name", "Igroup_Name", "Isubgroup_Name"]
