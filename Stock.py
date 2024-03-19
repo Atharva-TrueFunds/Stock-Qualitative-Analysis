@@ -23,26 +23,6 @@ imp_columns = df[
     [
         "scripCode",
         "companyName",
-        "currentValue",
-        "change",
-        "pChange",
-        "updatedOn",
-        "securityID",
-        "group",
-        "faceValue",
-        "industry",
-        "previousClose",
-        "previousOpen",
-        "dayHigh",
-        "dayLow",
-        "52weekHigh",
-        "52weekLow",
-        "weightedAvgPrice",
-        "totalTradedValue",
-        "totalTradedQuantity",
-        "2WeekAvgQuantity",
-        "marketCapFull",
-        "marketCapFreeFloat",
     ]
 ]
 print(imp_columns)

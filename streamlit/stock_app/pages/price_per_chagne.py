@@ -129,13 +129,6 @@ df_above_20 = pd.DataFrame(
     ],
 )
 
-# with pd.ExcelWriter("price_Change_day_to_day.xlsx") as writer:
-#     df_2_5.to_excel(writer, sheet_name="2-5%", index=False)
-#     df_5_10.to_excel(writer, sheet_name="5-10%", index=False)
-#     df_10_15.to_excel(writer, sheet_name="10-15%", index=False)
-#     df_15_20.to_excel(writer, sheet_name="15-20%", index=False)
-#     df_above_20.to_excel(writer, sheet_name="Above 20%", index=False)
-
 
 st.write("Percent Change below 5%")
 st.table(df_2_5)

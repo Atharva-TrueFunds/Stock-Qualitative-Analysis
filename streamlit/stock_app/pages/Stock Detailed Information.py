@@ -3,7 +3,6 @@ import pandas as pd
 from bsedata.bse import BSE
 from datetime import datetime
 import os
-from croniter import croniter
 
 today = datetime.today().strftime("%d %b")
 sheet_name = today
@@ -62,7 +61,7 @@ def fetch_data_from_bse(scripCode, sheet_name):
                 st.error(f"Error fetching data for script code {code}: {e}")
                 na_data = {
                     "scripCode": code,
-                    "companyName": fetched_data["companyName"].iloc[0],
+                    "companyName": "NA",
                     "currentValue": "NA",
                     "change": "NA",
                     "pChange": "NA",
@@ -108,12 +107,10 @@ def main():
         try:
             excel_data = pd.read_excel(
                 r"C:\Users\HP\Staging\streamlit\stock_app\code.xlsx",
-                sheet_name="Sheet1",
                 engine="openpyxl",
             )
             excel_data_1 = pd.read_excel(
-                r"C:\Users\HP\Staging\streamlit\stock_app\code.xlsx",
-                sheet_name="Sheet1",
+                r"C:\Users\HP\Staging\streamlit\stock_app\code.xlsx"
             )
             selected_columns = excel_data_1[
                 ["Sector_Name", "Industry_New_Name", "Igroup_Name", "Isubgroup_Name"]
@@ -596,7 +593,7 @@ def main():
             next_column_index = destination_sheet.max_column + 1
             for i, value in enumerate(last_column_values, start=1):
                 destination_sheet.cell(row=i, column=next_column_index, value=value)
-            workbook_all_sheets.save("All_sheets.xlsx")
+            workbook_all_sheets.save("ALl_sheets.xlsx")
         except Exception as e:
             print(f"Error: {e}")
 
@@ -697,7 +694,7 @@ def main():
             workbook = load_workbook("weightedAvgPrice.xlsx")
             source_sheet = workbook[sheet_name]
             workbook_all_sheets = load_workbook("All_sheets.xlsx")
-            destination_sheet = workbook_all_sheets["WeightedAvgPrice"]
+            destination_sheet = workbook_all_sheets["weightedAvgPrice"]
             last_column_index = source_sheet.max_column
             last_column_values = []
             for row in source_sheet.iter_rows(

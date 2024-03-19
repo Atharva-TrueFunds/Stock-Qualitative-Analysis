@@ -7,4 +7,3 @@ st.set_page_config(
 
 st.title("Qualitative Data Analysis")
 st.sidebar.success("Select the data Required.")
-
