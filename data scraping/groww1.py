@@ -5,8 +5,9 @@ from webdriver_manager.chrome import ChromeDriverManager
 from openpyxl import load_workbook
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import re
 
-wait_duration = 10
+wait_duration = 20
 
 urls = [
     "https://www.moneycontrol.com/mutual-funds/icici-prudential-value-discovery-fund/investment-info/MPI087",
@@ -49,51 +50,49 @@ urls = [
     "https://www.moneycontrol.com/mutual-funds/icici-prudential-technology-fund-regular-plan/investment-info/MPI048",
 ]
 
-
 chrome_service = Service(ChromeDriverManager().install())
 driver = webdriver.Chrome(service=chrome_service)
-for index, url in enumerate(urls):
-    try:
-        for index, url in enumerate(urls):
-            try:
-                driver.get(url)
+try:
+    for index, url in enumerate(urls):
+        try:
+            driver.get(url)
 
-                parent_div_xpath1 = "/html/body/div[15]/section[3]/div/div/div[1]"
+            # Extract fund name from the webpage URL
+            fund_name = re.search(r"mutual-funds\/(.*?)\/investment-info", url).group(1)
+            fund_name = fund_name.replace("-", " ").title()  # Format fund name
 
-                # Find li elements
-                li_elements = driver.find_elements(By.XPATH, f"{parent_div_xpath1}//p")
-                combined_data_li = [
-                    elem.text.encode("utf-8").decode("ascii", "ignore")
-                    for elem in li_elements
-                ]
-                xpath2 = "/html/body/div[15]/section[3]/div/div/div[1]/div[3]"
-                span_elements = driver.find_elements(By.XPATH, f"{xpath2}//li")
-                combined_data_span = [
-                    elem.text.encode("utf-8").decode("ascii", "ignore")
-                    for elem in span_elements
-                ]
+            parent_div_xpath = "/html/body/div[15]/section[3]/div/div"
 
-                print("Data extracted successfully (LI):", combined_data_li)
-                print("Data extracted successfully (SPAN):", combined_data_span)
+            h2_elements = driver.find_elements(By.XPATH, f"{parent_div_xpath}//h2")
+            combined_data_h2 = [elem.text for elem in h2_elements]
 
-                excel_filename = "money_control.xlsx"
-                wb = load_workbook(excel_filename)
+            p_elements = driver.find_elements(By.XPATH, f"{parent_div_xpath}//p")
+            combined_data_p = [elem.text for elem in p_elements]
 
-                sheet_name = "Quant Small Cap Fund"
-                ws = wb[sheet_name]
+            span_elements = driver.find_elements(By.XPATH, f"{parent_div_xpath}//p")
+            combined_data_span = [elem.text for elem in span_elements]
 
-                start_column = ws.max_column + 1 if ws.max_column else 1
+            print("Data extracted successfully (H2):", combined_data_h2)
+            print("Data extracted successfully (P):", combined_data_p)
 
-                for row, value in enumerate(combined_data_li, start=1):
-                    ws.cell(row=row, column=start_column, value=value)
-                for row, value in enumerate(combined_data_span, start=1):
-                    ws.cell(row=row, column=start_column, value=value)
+            excel_filename = "money_control.xlsx"
+            wb = load_workbook(excel_filename)
 
-                wb.save(excel_filename)
-                print(f"Data added to '{sheet_name}' sheet in {excel_filename}")
+            # Create a new sheet with the fund name
+            ws = wb.create_sheet(title=fund_name)
 
-            except Exception as e:
-                print(f"Error processing URL: {url}. Error: {str(e)}")
+            start_column = ws.max_column + 1 if ws.max_column else 1
 
-    finally:
-        driver.quit()
+            for row, value in enumerate(combined_data_h2, start=1):
+                ws.cell(row=row, column=start_column, value=value)
+            for row, value in enumerate(combined_data_p, start=1):
+                ws.cell(row=row, column=start_column, value=value)
+
+            wb.save(excel_filename)
+            print(f"Data added to '{fund_name}' sheet in {excel_filename}")
+
+        except Exception as e:
+            print(f"Error processing URL: {url}. Error: {str(e)}")
+
+finally:
+    driver.quit()

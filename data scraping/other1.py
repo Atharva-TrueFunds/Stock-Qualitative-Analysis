@@ -9,7 +9,11 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 
-wait_duration = 5
+wait_duration = 100
+
+username = "atharvachoudhari.truefunds@gmail.com"
+password = "Atharva@123"
+driver = webdriver.Chrome("service=chrome_service")
 
 urls = [
     "https://www.valueresearchonline.com/funds/2310/icici-prudential-value-discovery-fund/",
@@ -52,8 +56,14 @@ urls = [
     # "https://www.valueresearchonline.com/funds/737/icici-prudential-technology-fund/",
 ]
 
+driver.get(urls)
+
+driver.find_element_by_name("username")
+
+
 for i in range(len(urls)):
     urls[i] = urls[i] + "#other"
+
 
 for index, url in enumerate(urls):
     try:
@@ -61,19 +71,25 @@ for index, url in enumerate(urls):
         driver = webdriver.Chrome(service=chrome_service)
 
         driver.get(url)
+        # /html/body/section[2]/div[2]/div/div[7]/section/div/div[2]/div[1]/div/ul[2]/li[1]/span[1]
 
-        parent_div_xpath_h3 = "/html/body/div/div[2]/div[2]/div[1]/div/div[1]/div[2]/div/div[1]/div/div[12]/div/div/div/div/div[2]/div/div/div[3]/div/div[2]"
+        parent_div_xpath_h3 = (
+            "/html/body/section[2]/div[2]/div/div[7]/section/div/div[3]/div[1]"
+        )
 
         WebDriverWait(driver, wait_duration).until(
             EC.visibility_of_element_located((By.XPATH, parent_div_xpath_h3))
         )
 
         parent_div_li = driver.find_element(By.XPATH, parent_div_xpath_h3)
-        list_items_li = parent_div_li.find_elements(By.XPATH, ".//text")
+        list_items_li = parent_div_li.find_elements(By.XPATH, ".//p")
         combined_data_li = [item.text for item in list_items_li]
 
         parsed_url = urlparse(url)
-        fund_name = parsed_url.path.split("/")[3].replace("-", " ").title()[:31]
+
+        path_components = parsed_url.path.split("/")
+
+        fund_name = path_components[3].replace("-", " ").title()[:31]
 
         excel_filename = "combined_data.xlsx"
         wb = load_workbook(excel_filename)
@@ -82,7 +98,6 @@ for index, url in enumerate(urls):
             ws = wb[fund_name]
             start_column = ws.max_column + 1 if ws.max_column else 1
         else:
-            # Create a new sheet with the fund name
             ws = wb.create_sheet(fund_name)
             start_column = 1
 
