@@ -9,40 +9,7 @@ import re
 
 wait_duration = 20
 
-urls = [
-    "https://www.moneycontrol.com/mutual-funds/icici-prudential-value-discovery-fund/investment-info/MPI087",
-    "https://www.moneycontrol.com/mutual-funds/sbi-contra-fund/investment-info/MSB010",
-    "https://www.moneycontrol.com/mutual-funds/quant-small-cap-fund-direct-plan/investment-info/MES056",
-    "https://www.moneycontrol.com/mutual-funds/axis-small-cap-fund-direct-plan/investment-info/MAA316",
-    "https://www.moneycontrol.com/mutual-funds/kotak-small-cap-fund-direct-plan/investment-info/MKM516",
-    "https://www.moneycontrol.com/mutual-funds/nippon-india-small-cap-fund/investment-info/MRC587",
-    "https://www.moneycontrol.com/mutual-funds/quant-active-fund-direct-plan/investment-info/MES061",
-    "https://www.moneycontrol.com/mutual-funds/kotak-emerging-equity-scheme-regular-plan/investment-info/MKM099",
-    "https://www.moneycontrol.com/mutual-funds/tata-large-cap-fund-regular-plan/investment-info/MTA006",
-    "https://www.moneycontrol.com/mutual-funds/sbi-blue-chip-fund/investment-info/MSB079",
-    "https://www.moneycontrol.com/mutual-funds/nav/axis-bluechip-fund-growth/MAA009",
-    "https://www.moneycontrol.com/mutual-funds/nippon-india-large-cap-fund-regular-plan/investment-info/MRC155",
-    "https://www.moneycontrol.com/mutual-funds/quant-large-mid-cap-fund/investment-info/MES022",
-    "https://www.moneycontrol.com/mutual-funds/tata-large-mid-cap-fund-regular-plan/investment-info/MTA043",
-    "https://www.moneycontrol.com/mutual-funds/canara-robeco-blue-chip-equity-fund-regular-plan/investment-info/MCA174",
-    "https://www.moneycontrol.com/mutual-funds/mirae-asset-emerging-bluechip-fund/investment-info/MMA088",
-    "https://www.moneycontrol.com/mutual-funds/edelweiss-mid-cap-fund-direct-plan/investment-info/MJP117",
-    "https://www.moneycontrol.com/mutual-funds/parag-parikh-flexi-cap-fund-regular-plan/investment-info/MPP001",
-    "https://www.moneycontrol.com/mutual-funds/icici-prudential-india-opportunities-fund-regular-plan/investment-info/MPI4087",
-    "https://www.moneycontrol.com/mutual-funds/nippon-india-flexi-cap-fund-direct-plan/investment-info/MRC2885",
-    "https://www.moneycontrol.com/mutual-funds/quant-large-cap-fund-direct-plan/investment-info/MES080",
-    "https://www.moneycontrol.com/mutual-funds/bnp-paribas-long-term-equity-fund/investment-info/MAB041",
-    "https://www.moneycontrol.com/mutual-funds/icici-prudential-multi-asset-fund/investment-info/MPI038",
-    "https://www.moneycontrol.com/mutual-funds/icici-prudential-technology-fund/investment-info/MPI015",
-    "https://www.moneycontrol.com/mutual-funds/icici-prudential-value-discovery-fund/investment-info/MPI087",
-    "https://www.moneycontrol.com/mutual-funds/sbi-contra-fund/investment-info/MSB010",
-    "https://www.moneycontrol.com/mutual-funds/quant-small-cap-fund-direct-plan/investment-info/MES056",
-    "https://www.moneycontrol.com/mutual-funds/axis-small-cap-fund-direct-plan/investment-info/MAA286",
-    "https://www.moneycontrol.com/mutual-funds/quant-active-fund-direct-plan/investment-info/MQU001",
-    "https://www.moneycontrol.com/mutual-funds/axis-mid-cap-fund-direct-plan/investment-info/MAA273",
-    "https://www.moneycontrol.com/mutual-funds/sbi-midcap-fund-direct-plan/investment-info/MSB260",
-    "https://www.moneycontrol.com/mutual-funds/tata-mid-cap-growth-fund-direct-plan/investment-info/MTA210",
-]
+urls = ["https://groww.in/mutual-funds/quant-small-cap-fund-direct-plan-growth"]
 
 chrome_service = Service(ChromeDriverManager().install())
 driver = webdriver.Chrome(service=chrome_service)
@@ -51,13 +18,14 @@ try:
         try:
             driver.get(url)
 
-            # Extract fund name from the webpage URL
-            fund_name = re.search(r"mutual-funds\/(.*?)\/investment-info", url).group(1)
-            fund_name = fund_name.replace("-", " ").title()  # Format fund name
+            # # Extract fund name from the webpage URL
+            # fund_name = re.search(r"mutual-funds\/(.*?)\/investment-info", url).group(1)
+            # fund_name = fund_name.replace("-", " ").title()  # Format fund name
+            fund_name = "Quant"
 
-            parent_div_xpath = "/html/body/div[15]/section[3]/div/div/div[1]"
+            parent_div_xpath = "/html/body"
 
-            h2_elements = driver.find_elements(By.XPATH, f"{parent_div_xpath}//li")
+            h2_elements = driver.find_elements(By.XPATH, f"{parent_div_xpath}//div")
             combined_data_h2 = [elem.text for elem in h2_elements]
 
             # p_elements = driver.find_elements(By.XPATH, f"{parent_div_xpath}//p")
@@ -69,7 +37,7 @@ try:
             print("Data extracted successfully (H2):", combined_data_h2)
             # print("Data extracted successfully (P):", combined_data_p)
 
-            excel_filename = "fund_manager.xlsx"
+            excel_filename = "combined_data.xlsx"
             wb = load_workbook(excel_filename)
 
             ws = wb.create_sheet(title=fund_name)

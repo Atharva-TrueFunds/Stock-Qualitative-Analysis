@@ -14,7 +14,7 @@ driver.maximize_window()
 
 username = "atharvachoudhari.truefunds@gmail.com"
 password = "atharva@123"
-login_url = "https://www.valueresearchonline.com/funds/17366/quant-small-cap-fund-direct-plan/#other"
+login_url = "https://www.valueresearchonline.com/funds/2310/icici-prudential-value-discovery-fund/#other"
 
 driver.get(login_url)
 
