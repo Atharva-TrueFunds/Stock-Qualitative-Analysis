@@ -2,79 +2,50 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
-import pandas as pd
 from urllib.parse import urlparse
 from openpyxl import load_workbook
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import time
 
-wait_duration = 100
+wait_duration = 10
+chrome_service = Service(ChromeDriverManager().install())
+driver = webdriver.Chrome(service=chrome_service)
+driver.maximize_window()
 
 username = "atharvachoudhari.truefunds@gmail.com"
-password = "Atharva@123"
-driver = webdriver.Chrome("service=chrome_service")
+password = "atharva@123"
+login_url = "https://www.valueresearchonline.com/funds/17366/quant-small-cap-fund-direct-plan/#other"
+
+driver.get(login_url)
+
+email_input = WebDriverWait(driver, wait_duration).until(
+    EC.visibility_of_element_located((By.ID, "user_email"))
+)
+email_input.send_keys(username)
+
+password_input = WebDriverWait(driver, wait_duration).until(
+    EC.visibility_of_element_located((By.ID, "user_password"))
+)
+password_input.send_keys(password)
+
+login_button = WebDriverWait(driver, wait_duration).until(
+    EC.element_to_be_clickable((By.NAME, "commit"))
+)
+login_button.click()
 
 urls = [
     "https://www.valueresearchonline.com/funds/2310/icici-prudential-value-discovery-fund/",
-    # "https://www.valueresearchonline.com/funds/633/sbi-contra-fund/",
-    # "https://www.valueresearchonline.com/funds/66/quant-small-cap-fund/",
-    # "https://www.valueresearchonline.com/funds/22334/axis-small-cap-fund-regular-plan/",
-    # "https://www.valueresearchonline.com/funds/2597/kotak-small-cap-fund-regular-plan/",
-    # "https://www.valueresearchonline.com/funds/11463/nippon-india-small-cap-fund/",
-    # "https://www.valueresearchonline.com/funds/952/quant-active-fund/",
-    # "https://www.valueresearchonline.com/funds/958/quant-mid-cap-fund/",
-    # "https://www.valueresearchonline.com/funds/12052/axis-midcap-fund/",
-    # "https://www.valueresearchonline.com/funds/4270/kotak-emerging-equity-fund-regular-plan/",
-    # "https://www.valueresearchonline.com/funds/183/nippon-india-growth-fund/",
-    # "https://www.valueresearchonline.com/funds/2662/sbi-magnum-midcap-fund/",
-    # "https://www.valueresearchonline.com/funds/103/tata-midcap-growth-fund-regular-plan/",
-    # "https://www.valueresearchonline.com/funds/509/tata-large-cap-fund-regular-plan/",
-    # "https://www.valueresearchonline.com/funds/4871/edelweiss-large-mid-cap-fund-regular-plan/",
-    # "https://www.valueresearchonline.com/funds/3083/sbi-bluechip-fund/",
-    # "https://www.valueresearchonline.com/funds/10780/axis-bluechip-fund/",
-    # "https://www.valueresearchonline.com/funds/5270/nippon-india-large-cap-fund/",
-    # "https://www.valueresearchonline.com/funds/577/kotak-bluechip-fund-regular-plan/",
-    # "https://www.valueresearchonline.com/funds/4111/quant-large-and-mid-cap-fund/",
-    # "https://www.valueresearchonline.com/funds/102/tata-large-mid-cap-fund-regular-plan/",
-    # "https://www.valueresearchonline.com/funds/10432/edelweiss-large-cap-fund-regular-plan/",
-    # "https://www.valueresearchonline.com/funds/197/sbi-large-midcap-fund/",
-    # "https://www.valueresearchonline.com/funds/11333/canara-robeco-bluechip-equity-fund-regular-plan/",
-    # "https://www.valueresearchonline.com/funds/11213/mirae-asset-emerging-bluechip-fund-regular-plan/",
-    # "https://www.valueresearchonline.com/funds/6227/edelweiss-mid-cap-fund-regular-plan/",
-    # "https://www.valueresearchonline.com/funds/19699/parag-parikh-flexi-cap-fund-regular-plan/",
-    # "https://www.valueresearchonline.com/funds/38583/icici-prudential-india-opportunities-fund/",
-    # "https://www.valueresearchonline.com/funds/41614/nippon-india-flexi-cap-fund-regular-plan/",
-    # "https://www.valueresearchonline.com/funds/42365/quant-large-cap-fund-regular-plan/",
-    # "https://www.valueresearchonline.com/funds/3001/baroda-bnp-paribas-elss-fund/",
-    # "https://www.valueresearchonline.com/funds/8216/quant-focused-fund/",
-    # "https://www.valueresearchonline.com/funds/40104/parag-parikh-tax-saver-fund-regular-plan/",
-    # "https://www.valueresearchonline.com/funds/10032/bandhan-elss-tax-saver-fund-regular-plan/",
-    # "https://www.valueresearchonline.com/funds/2937/kotak-elss-tax-saver-regular-plan/",
-    # "https://www.valueresearchonline.com/funds/42502/sundaram-flexi-cap-fund-regular-plan/",
-    # "https://www.valueresearchonline.com/funds/1471/icici-prudential-multi-asset-fund/",
-    # "https://www.valueresearchonline.com/funds/737/icici-prudential-technology-fund/",
 ]
 
-driver.get(urls)
+excel_filename = "combined_data.xlsx"
+wb = load_workbook(excel_filename)
 
-driver.find_element_by_name("username")
-
-
-for i in range(len(urls)):
-    urls[i] = urls[i] + "#other"
-
-
-for index, url in enumerate(urls):
+for url in urls:
     try:
-        chrome_service = Service(ChromeDriverManager().install())
-        driver = webdriver.Chrome(service=chrome_service)
-
-        driver.get(url)
-        # /html/body/section[2]/div[2]/div/div[7]/section/div/div[2]/div[1]/div/ul[2]/li[1]/span[1]
+        driver.get(url + "#other")
 
         parent_div_xpath_h3 = (
-            "/html/body/section[2]/div[2]/div/div[7]/section/div/div[3]/div[1]"
+            "/html/body/section[2]/div[2]/div/div[7]/section/div/div[2]/div/div"
         )
 
         WebDriverWait(driver, wait_duration).until(
@@ -82,17 +53,11 @@ for index, url in enumerate(urls):
         )
 
         parent_div_li = driver.find_element(By.XPATH, parent_div_xpath_h3)
-        list_items_li = parent_div_li.find_elements(By.XPATH, ".//p")
+        list_items_li = parent_div_li.find_elements(By.XPATH, ".//span")
         combined_data_li = [item.text for item in list_items_li]
 
         parsed_url = urlparse(url)
-
-        path_components = parsed_url.path.split("/")
-
-        fund_name = path_components[3].replace("-", " ").title()[:31]
-
-        excel_filename = "combined_data.xlsx"
-        wb = load_workbook(excel_filename)
+        fund_name = parsed_url.path.split("/")[3].replace("-", " ").title()[:31]
 
         if fund_name in wb.sheetnames:
             ws = wb[fund_name]
@@ -104,9 +69,11 @@ for index, url in enumerate(urls):
         for i, data in enumerate(combined_data_li, start=1):
             ws.cell(row=i, column=start_column, value=data)
 
-        wb.save(excel_filename)
         print(f"Data added to '{fund_name}' sheet in {excel_filename}")
 
     except Exception as e:
         print(f"Error processing URL: {url}. Error: {str(e)}")
+
+wb.save(excel_filename)
+
 driver.quit()

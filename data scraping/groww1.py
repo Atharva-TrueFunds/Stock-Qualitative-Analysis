@@ -13,41 +13,35 @@ urls = [
     "https://www.moneycontrol.com/mutual-funds/icici-prudential-value-discovery-fund/investment-info/MPI087",
     "https://www.moneycontrol.com/mutual-funds/sbi-contra-fund/investment-info/MSB010",
     "https://www.moneycontrol.com/mutual-funds/quant-small-cap-fund-direct-plan/investment-info/MES056",
+    "https://www.moneycontrol.com/mutual-funds/axis-small-cap-fund-direct-plan/investment-info/MAA316",
+    "https://www.moneycontrol.com/mutual-funds/kotak-small-cap-fund-direct-plan/investment-info/MKM516",
+    "https://www.moneycontrol.com/mutual-funds/nippon-india-small-cap-fund/investment-info/MRC587",
+    "https://www.moneycontrol.com/mutual-funds/quant-active-fund-direct-plan/investment-info/MES061",
+    "https://www.moneycontrol.com/mutual-funds/kotak-emerging-equity-scheme-regular-plan/investment-info/MKM099",
+    "https://www.moneycontrol.com/mutual-funds/tata-large-cap-fund-regular-plan/investment-info/MTA006",
+    "https://www.moneycontrol.com/mutual-funds/sbi-blue-chip-fund/investment-info/MSB079",
+    "https://www.moneycontrol.com/mutual-funds/nav/axis-bluechip-fund-growth/MAA009",
+    "https://www.moneycontrol.com/mutual-funds/nippon-india-large-cap-fund-regular-plan/investment-info/MRC155",
+    "https://www.moneycontrol.com/mutual-funds/quant-large-mid-cap-fund/investment-info/MES022",
+    "https://www.moneycontrol.com/mutual-funds/tata-large-mid-cap-fund-regular-plan/investment-info/MTA043",
+    "https://www.moneycontrol.com/mutual-funds/canara-robeco-blue-chip-equity-fund-regular-plan/investment-info/MCA174",
+    "https://www.moneycontrol.com/mutual-funds/mirae-asset-emerging-bluechip-fund/investment-info/MMA088",
+    "https://www.moneycontrol.com/mutual-funds/edelweiss-mid-cap-fund-direct-plan/investment-info/MJP117",
+    "https://www.moneycontrol.com/mutual-funds/parag-parikh-flexi-cap-fund-regular-plan/investment-info/MPP001",
+    "https://www.moneycontrol.com/mutual-funds/icici-prudential-india-opportunities-fund-regular-plan/investment-info/MPI4087",
+    "https://www.moneycontrol.com/mutual-funds/nippon-india-flexi-cap-fund-direct-plan/investment-info/MRC2885",
+    "https://www.moneycontrol.com/mutual-funds/quant-large-cap-fund-direct-plan/investment-info/MES080",
+    "https://www.moneycontrol.com/mutual-funds/bnp-paribas-long-term-equity-fund/investment-info/MAB041",
+    "https://www.moneycontrol.com/mutual-funds/icici-prudential-multi-asset-fund/investment-info/MPI038",
+    "https://www.moneycontrol.com/mutual-funds/icici-prudential-technology-fund/investment-info/MPI015",
+    "https://www.moneycontrol.com/mutual-funds/icici-prudential-value-discovery-fund/investment-info/MPI087",
+    "https://www.moneycontrol.com/mutual-funds/sbi-contra-fund/investment-info/MSB010",
+    "https://www.moneycontrol.com/mutual-funds/quant-small-cap-fund-direct-plan/investment-info/MES056",
     "https://www.moneycontrol.com/mutual-funds/axis-small-cap-fund-direct-plan/investment-info/MAA286",
-    "https://www.moneycontrol.com/mutual-funds/kotak-small-cap-fund-direct-plan/investment-info/MKC307",
-    "https://www.moneycontrol.com/mutual-funds/nippon-india-small-cap-fund-direct-plan/investment-info/MNI001",
     "https://www.moneycontrol.com/mutual-funds/quant-active-fund-direct-plan/investment-info/MQU001",
-    "https://www.moneycontrol.com/mutual-funds/quant-mid-cap-fund-direct-plan/investment-info/MQT002",
     "https://www.moneycontrol.com/mutual-funds/axis-mid-cap-fund-direct-plan/investment-info/MAA273",
-    "https://www.moneycontrol.com/mutual-funds/kotak-emerging-equity-fund-direct-plan/investment-info/MKC216",
-    "https://www.moneycontrol.com/mutual-funds/nippon-india-growth-fund-direct-plan/investment-info/MNI003",
     "https://www.moneycontrol.com/mutual-funds/sbi-midcap-fund-direct-plan/investment-info/MSB260",
     "https://www.moneycontrol.com/mutual-funds/tata-mid-cap-growth-fund-direct-plan/investment-info/MTA210",
-    "https://www.moneycontrol.com/mutual-funds/tata-large-cap-fund-direct-plan/investment-info/MTA002",
-    "https://www.moneycontrol.com/mutual-funds/edelweiss-large-midcap-fund-direct-plan/investment-info/MAB006",
-    "https://www.moneycontrol.com/mutual-funds/sbi-blue-chip-fund-direct-plan/investment-info/MSB105",
-    "https://www.moneycontrol.com/mutual-funds/axis-blue-chip-fund-direct-plan/investment-info/MAA287",
-    "https://www.moneycontrol.com/mutual-funds/nippon-india-large-cap-fund-direct-plan/investment-info/MNI004",
-    "https://www.moneycontrol.com/mutual-funds/kotak-bluechip-fund-direct-plan/investment-info/MKC002",
-    "https://www.moneycontrol.com/mutual-funds/quant-large-mid-cap-fund-direct-plan/investment-info/MQT001",
-    "https://www.moneycontrol.com/mutual-funds/tata-large-midcap-fund-direct-plan/investment-info/MTA209",
-    "https://www.moneycontrol.com/mutual-funds/edelweiss-large-cap-fund-direct-plan/investment-info/MAB004",
-    "https://www.moneycontrol.com/mutual-funds/sbi-large-mid-cap-fund-direct-plan/investment-info/MSB263",
-    "https://www.moneycontrol.com/mutual-funds/canara-robeco-blue-chip-equity-fund-direct-plan/investment-info/MCR028",
-    "https://www.moneycontrol.com/mutual-funds/mirae-asset-emerging-bluechip-fund-direct-plan/investment-info/MMI004",
-    "https://www.moneycontrol.com/mutual-funds/edelweiss-mid-cap-fund-direct-plan/investment-info/MAB003",
-    "https://www.moneycontrol.com/mutual-funds/parag-parikh-flexi-cap-fund-direct-plan/investment-info/MPP004",
-    "https://www.moneycontrol.com/mutual-funds/icici-prudential-india-opportunities-fund-direct-plan/investment-info/MPI050",
-    "https://www.moneycontrol.com/mutual-funds/nippon-india-flexicap-fund-direct-plan/investment-info/MNI012",
-    "https://www.moneycontrol.com/mutual-funds/quant-large-cap-fund-direct-plan/investment-info/MQT004",
-    "https://www.moneycontrol.com/mutual-funds/baroda-bnp-paribas-tax-savings-fund-direct-plan/investment-info/MBN004",
-    "https://www.moneycontrol.com/mutual-funds/quant-focused-fund-regular-plan/investment-info/MQU002",
-    "https://www.moneycontrol.com/mutual-funds/parag-parikh-tax-saver-fund-regular-plan/investment-info/MPP002",
-    "https://www.moneycontrol.com/mutual-funds/bandhan-bank-tax-saver-fund-regular-plan/investment-info/MBB001",
-    "https://www.moneycontrol.com/mutual-funds/kotak-tax-saver-fund-regular-plan/investment-info/MKM240",
-    "https://www.moneycontrol.com/mutual-funds/sundaram-flexi-cap-fund-regular-plan/investment-info/MSU079",
-    "https://www.moneycontrol.com/mutual-funds/icici-prudential-multi-asset-fund-regular-plan/investment-info/MPI204",
-    "https://www.moneycontrol.com/mutual-funds/icici-prudential-technology-fund-regular-plan/investment-info/MPI048",
 ]
 
 chrome_service = Service(ChromeDriverManager().install())
@@ -61,32 +55,31 @@ try:
             fund_name = re.search(r"mutual-funds\/(.*?)\/investment-info", url).group(1)
             fund_name = fund_name.replace("-", " ").title()  # Format fund name
 
-            parent_div_xpath = "/html/body/div[15]/section[3]/div/div"
+            parent_div_xpath = "/html/body/div[15]/section[3]/div/div/div[1]"
 
-            h2_elements = driver.find_elements(By.XPATH, f"{parent_div_xpath}//h2")
+            h2_elements = driver.find_elements(By.XPATH, f"{parent_div_xpath}//li")
             combined_data_h2 = [elem.text for elem in h2_elements]
 
-            p_elements = driver.find_elements(By.XPATH, f"{parent_div_xpath}//p")
-            combined_data_p = [elem.text for elem in p_elements]
+            # p_elements = driver.find_elements(By.XPATH, f"{parent_div_xpath}//p")
+            # combined_data_p = [elem.text for elem in p_elements]
 
-            span_elements = driver.find_elements(By.XPATH, f"{parent_div_xpath}//p")
-            combined_data_span = [elem.text for elem in span_elements]
+            # span_elements = driver.find_elements(By.XPATH, f"{parent_div_xpath}//p")
+            # combined_data_span = [elem.text for elem in span_elements]
 
             print("Data extracted successfully (H2):", combined_data_h2)
-            print("Data extracted successfully (P):", combined_data_p)
+            # print("Data extracted successfully (P):", combined_data_p)
 
-            excel_filename = "money_control.xlsx"
+            excel_filename = "fund_manager.xlsx"
             wb = load_workbook(excel_filename)
 
-            # Create a new sheet with the fund name
             ws = wb.create_sheet(title=fund_name)
 
             start_column = ws.max_column + 1 if ws.max_column else 1
 
             for row, value in enumerate(combined_data_h2, start=1):
                 ws.cell(row=row, column=start_column, value=value)
-            for row, value in enumerate(combined_data_p, start=1):
-                ws.cell(row=row, column=start_column, value=value)
+            # for row, value in enumerate(combined_data_p, start=1):
+            #     ws.cell(row=row, column=start_column, value=value)
 
             wb.save(excel_filename)
             print(f"Data added to '{fund_name}' sheet in {excel_filename}")
