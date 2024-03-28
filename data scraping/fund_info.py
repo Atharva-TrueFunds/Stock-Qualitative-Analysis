@@ -42,6 +42,9 @@ urls = [
     "https://www.moneycontrol.com/mutual-funds/axis-mid-cap-fund-direct-plan/investment-info/MAA273",
     "https://www.moneycontrol.com/mutual-funds/sbi-midcap-fund-direct-plan/investment-info/MSB260",
     "https://www.moneycontrol.com/mutual-funds/tata-mid-cap-growth-fund-direct-plan/investment-info/MTA210",
+    "https://www.moneycontrol.com/mutual-funds/nippon-india-small-cap-fund-direct-plan/investment-info/MRC935",
+    "https://www.moneycontrol.com/mutual-funds/nav/quant-mid-cap-fund-direct/MES043",
+    "https://www.moneycontrol.com/mutual-funds/nippon-india-growth-fund-direct-plan/investment-info/MRC919",
 ]
 
 chrome_service = Service(ChromeDriverManager().install())
@@ -57,19 +60,19 @@ try:
 
             parent_div_xpath = "/html/body/div[15]/section[3]/div/div/div[1]"
 
-            h2_elements = driver.find_elements(By.XPATH, f"{parent_div_xpath}//li")
+            h2_elements = driver.find_elements(By.XPATH, f"{parent_div_xpath}//h2")
             combined_data_h2 = [elem.text for elem in h2_elements]
 
-            # p_elements = driver.find_elements(By.XPATH, f"{parent_div_xpath}//p")
-            # combined_data_p = [elem.text for elem in p_elements]
+            p_elements = driver.find_elements(By.XPATH, f"{parent_div_xpath}//p")
+            combined_data_p = [elem.text for elem in p_elements]
 
-            # span_elements = driver.find_elements(By.XPATH, f"{parent_div_xpath}//p")
-            # combined_data_span = [elem.text for elem in span_elements]
+            span_elements = driver.find_elements(By.XPATH, f"{parent_div_xpath}//p")
+            combined_data_span = [elem.text for elem in span_elements]
 
             print("Data extracted successfully (H2):", combined_data_h2)
-            # print("Data extracted successfully (P):", combined_data_p)
+            print("Data extracted successfully (P):", combined_data_p)
 
-            excel_filename = "fund_manager.xlsx"
+            excel_filename = "fund_objective.xlsx"
             wb = load_workbook(excel_filename)
 
             ws = wb.create_sheet(title=fund_name)
@@ -78,13 +81,14 @@ try:
 
             for row, value in enumerate(combined_data_h2, start=1):
                 ws.cell(row=row, column=start_column, value=value)
-            # for row, value in enumerate(combined_data_p, start=1):
-            #     ws.cell(row=row, column=start_column, value=value)
+            for row, value in enumerate(combined_data_p, start=1):
+                ws.cell(row=row, column=start_column, value=value)
 
             wb.save(excel_filename)
             print(f"Data added to '{fund_name}' sheet in {excel_filename}")
 
         except Exception as e:
+            print(urls)
             print(f"Error processing URL: {url}. Error: {str(e)}")
 
 finally:
